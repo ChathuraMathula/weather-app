@@ -1,0 +1,11 @@
+.wait-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    color: white;
+}
+
+.wait-message > span {
+    margin-top: 0.8rem;
+}

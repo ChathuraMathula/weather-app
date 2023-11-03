@@ -1,0 +1,41 @@
+.main-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 0.5rem;
+
+    min-height: calc(100vh - 4rem - 2.2rem - 3.5rem);
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+/* For Medium Mobile Phones */
+@media (min-width: 576px) {
+    .main-container {
+        padding: 1rem;
+    }
+}
+
+/* For Tablets & Laptops */
+@media (min-width: 768px) {
+    .main-container {
+        padding: 5px;
+    }
+}
+
+/* For Laptops */
+@media (min-width: 992px) {
+    .main-container {
+        width: 90%;
+    }
+}
+
+/* For Large screens */
+@media (min-width: 1200px) {
+    .main-container {
+        width: 90%;
+    }
+}

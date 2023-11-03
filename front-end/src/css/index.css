@@ -1,0 +1,40 @@
+* {
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+#root {
+  margin: 0;
+}
+
+body {
+  background-color: #1f2128;
+  background-image: url(../images/Header_cloud_bg_extra_small.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center top;
+  background-attachment: fixed;
+  margin: 0;
+}
+
+
+/* For Medium Mobile Phones */
+@media (min-width: 576px) {
+  body {
+    background-image: url(../images/Header_cloud_bg_small.png);
+  }
+}
+
+/* For Tablets & Laptops */
+@media (min-width: 768px) {
+  body {
+    background-image: url(../images/Header_cloud_bg_medium.png);
+  }
+}
+
+/* For Laptops */
+@media (min-width: 992px) {}
+
+
+/* For Large screens */
+@media (min-width: 1200px) {}

@@ -1,0 +1,29 @@
+.back-button {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 0.3rem;
+}
+
+.back-button:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+/* For Medium Mobile Phones */
+@media (min-width: 576px) {
+   
+}
+
+/* For Tablets & Laptops */
+@media (min-width: 768px) {
+    
+}
+
+/* For Laptops */
+@media (min-width: 992px) {
+    
+}
+
+/* For Large screens */
+@media (min-width: 1200px) {}

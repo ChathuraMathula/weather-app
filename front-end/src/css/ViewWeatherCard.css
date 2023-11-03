@@ -1,0 +1,36 @@
+.view-weather-card__container {
+    position: relative;
+    width: 380px;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+/* For Medium Mobile Phones */
+@media (min-width: 576px) {
+    .view-weather-card__container {
+        width: 400px;
+    }
+
+}
+
+/* For Tablets & Laptops */
+@media (min-width: 768px) {
+    .view-weather-card__container {
+        width: 480px;
+    }
+}
+
+/* For Laptops */
+@media (min-width: 992px) {
+    .view-weather-card__container {
+        width: 500px;
+    }
+
+}
+
+/* For Large screens */
+@media (min-width: 1200px) {
+    .view-weather-card__container {
+        width: 600px;
+    }
+}

@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+
+  front-end:
+    build: ./front-end
+    ports:
+      - 3000:3000
+    volumes:
+      - type: bind
+        source: ./front-end
+        target: /app
+      - /app/node_modules
+
+  back-end:
+    build: ./back-end
+    ports:
+      - 3001:3001
+    volumes:
+      - type: bind
+        source: ./back-end
+        target: /app
+      - /app/node_modules
+    environment:
+      MONGO_CONNECTION_URL: mongodb://database/
+
+  database:
+    image: mongo:7
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data/db:/data/db

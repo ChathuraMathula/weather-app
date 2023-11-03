@@ -1,0 +1,39 @@
+.weather-card__container {
+    margin: 0.5rem 0;
+    border-radius: 5px;
+    width: 380px;
+}
+
+.weather-card__container:hover {
+    cursor: pointer;
+    scale: 95% 95%;
+    transition: all 0.4s;
+}
+
+/* For Medium Mobile Phones */
+@media (min-width: 576px) {
+    .weather-card__container {
+        margin: 1rem 0;
+        border-radius: 5px;
+        width: 460px;
+    }
+}
+
+/* For Tablets & Laptops */
+@media (min-width: 768px) {
+    .weather-card__container {
+        width: 360px;
+        margin: 0.2rem;
+    }
+}
+
+/* For Laptops */
+@media (min-width: 992px) {
+    .weather-card__container {
+        width: 400px;
+        margin: 0.4rem;
+    }
+}
+
+/* For Large screens */
+@media (min-width: 1200px) {}

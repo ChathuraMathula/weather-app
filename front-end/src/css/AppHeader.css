@@ -1,0 +1,23 @@
+h1.weather-app__heading {
+    text-align: center;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin: 2rem;
+
+    user-select: none;
+}
+
+h1.weather-app__heading:hover {
+    cursor: pointer;
+    opacity: 0.5;
+    transition: all 0.4s;
+}
+
+h1.weather-app__heading>img {
+    height: 2.2rem;
+    width: 2.2rem;
+    margin-right: 10px;
+}
