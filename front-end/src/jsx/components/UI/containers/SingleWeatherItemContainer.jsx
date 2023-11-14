@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import ViewWeatherCard from "../cards/view_weather_card/ViewWeatherCard";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { CITY_NAME_SEARCH_PARAM_KEY, PAGE_NOT_FOUND_PATH, ROOT_PATH } from "../../../../js/constants/constants";
+import MainContainer from "./MainContainer";
+import ErrorMessage from "../other/ErrorMessage";
+import LoadingSpinner from "../other/LoadingSpinner";
 
-export default function SingleWeatherItemContainer({ weatherData }) {
+export default function SingleWeatherItemContainer({ weatherData, error, isLoading }) {
 
     const [searchParams] = useSearchParams();
     const [cityWeatherData, setCityWeatherData] = useState({});
@@ -32,10 +35,19 @@ export default function SingleWeatherItemContainer({ weatherData }) {
     if (cityWeatherData?.name) {
         return (
             <>
-                <ViewWeatherCard
-                    city={cityWeatherData}
-                    onClickBack={onClickBackhandler}
-                />
+                <MainContainer>
+                    {
+                        error
+                            ? <ErrorMessage error={error} />
+                            : isLoading
+                                ? <LoadingSpinner />
+                                : <ViewWeatherCard
+                                    city={cityWeatherData}
+                                    onClickBack={onClickBackhandler}
+                                />
+                    }
+                </MainContainer>
+
             </>
         );
     }

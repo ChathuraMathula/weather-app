@@ -1,8 +1,10 @@
 import express from 'express';
 
-import { addCity, getAppCities, removeCity } from '../controllers/city.controller.js';
+import { addCity, getAppCities, getCitiesByCityName, removeCity } from '../controllers/city.controller.js';
 
 const router = express.Router();
+
+router.post("/api/cities", getCitiesByCityName);
 
 router.get("/api/app/cities", getAppCities);
 

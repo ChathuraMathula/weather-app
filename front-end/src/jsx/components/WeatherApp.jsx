@@ -12,6 +12,7 @@ import AllWeatherItemsContainer from './UI/containers/AllWeatherItemsContainer';
 import SingleWeatherItemContainer from './UI/containers/SingleWeatherItemContainer';
 import ErrorMessage from './UI/other/ErrorMessage';
 import { PAGE_NOT_FOUND_PATH, ROOT_PATH, WEATHER_CARD_VIEW_PATH } from '../../js/constants/constants';
+import MainContainer from './UI/containers/MainContainer';
 
 // const cityCodes = cities.List.map(city => city.CityCode);
 
@@ -32,6 +33,8 @@ export default function WeatherApp() {
     }
   }, [cityCodes]);
 
+
+  console.log("HERE 2: ", weatherData)
 
   const fetchWeatherData = async () => {
 
@@ -57,25 +60,52 @@ export default function WeatherApp() {
       setIsLoading(false);
       setError(false);
     }
-
   };
+
+  const onAddCityHandler = (weatherData) => {
+    const data = {
+      cnt: weatherData.length,
+      list: weatherData
+    }
+    console.log(data)
+    cacheWeatherData(data);
+    setWeatherData({ ...data });
+  }
 
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Layout error={error} isLoading={isLoading} />}>
+        <Route element={<Layout />}>
           <Route
             path={ROOT_PATH}
-            element={<AllWeatherItemsContainer weatherData={weatherData} />}
+            element={
+              <AllWeatherItemsContainer
+                error={error}
+                isLoading={isLoading}
+                weatherData={weatherData}
+                onAddCity={onAddCityHandler}
+              />
+            }
           />
           <Route
             path={WEATHER_CARD_VIEW_PATH}
-            element={<SingleWeatherItemContainer weatherData={weatherData} />}
+            element={
+              <SingleWeatherItemContainer
+                error={error}
+                isLoading={isLoading}
+                weatherData={weatherData}
+              />
+            }
           />
           <Route
             path='*'
-            element={<ErrorMessage error={"404 - Oops, This Page Doesn't Exist."} />} />
+            element={
+              <MainContainer>
+                <ErrorMessage error={"404 - Oops, This Page Doesn't Exist."} />
+              </MainContainer>
+            }
+          />
         </Route>
       </Routes>
     </BrowserRouter>

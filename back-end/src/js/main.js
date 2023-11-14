@@ -3,10 +3,18 @@ import Database from "./helpers/database.helper.js";
 import cityRoutes from './routes/cityRoutes.js';
 
 import express from 'express';
+import cors from 'cors';
 
 const port = 3001;
 const app = express();
 
+var corsOptions = {
+    origin: 'http://localhost:3000',
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    optionsSuccessStatus: 200
+}
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cityRoutes);
 

@@ -1,7 +1,7 @@
 
 export const APP_HEADING = "Weather App";
 
-export const FOOTER_DESCRIPTION = "2023 Fidenz Technologies.";
+export const FOOTER_DESCRIPTION = "© 2023 | Chathura Ekanayake";
 
 export const WEATHER_API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 
@@ -22,3 +22,9 @@ export const WEATHER_CARD_VIEW_PATH = "/view";
 export const PAGE_NOT_FOUND_PATH = "/404"
 
 export const CITY_NAME_SEARCH_PARAM_KEY = "city";
+
+export const BACK_END_HOST_URL = "http://localhost:3001";
+
+export const GET_CITIES_BY_NAME_URL = `${BACK_END_HOST_URL}/api/cities`;
+
+export const ADD_CITY_URL = `${BACK_END_HOST_URL}/api/app/city`;

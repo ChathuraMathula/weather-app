@@ -2,8 +2,12 @@ import React from "react";
 import WeatherCard from "../cards/weather_card/WeatherCard";
 import { useNavigate } from "react-router-dom";
 import { WEATHER_CARD_VIEW_PATH } from "../../../../js/constants/constants";
+import DashboardMainContainer from "./DashboardMainContainer";
+import ErrorMessage from "../other/ErrorMessage";
+import LoadingSpinner from "../other/LoadingSpinner";
+import AddCity from "../other/AddCity";
 
-export default function AllWeatherItemsContainer(props) {
+export default function AllWeatherItemsContainer({ weatherData, error, isLoading, onAddCity }) {
 
     const navigate = useNavigate();
 
@@ -12,19 +16,29 @@ export default function AllWeatherItemsContainer(props) {
         navigate(cityWeatherPath, { replace: true });
     };
 
+    const onAddCityHandler = (weatherData) => {
+        onAddCity(weatherData);
+    }
     return (
         <>
-            {
-                props.weatherData.list.map((listItem, i) => {
-                    return (
-                        <WeatherCard
-                            key={listItem.name}
-                            city={listItem}
-                            onClickWeatherCard={onClickWeatherCardHandler}
-                        />
-                    );
-                })
-            }
+            <AddCity onAddCity={onAddCityHandler} />
+            <DashboardMainContainer>
+                {
+                    error
+                        ? <ErrorMessage error={error} />
+                        : isLoading
+                            ? <LoadingSpinner />
+                            : weatherData.list.map((listItem, i) => {
+                                return (
+                                    <WeatherCard
+                                        key={listItem.name}
+                                        city={listItem}
+                                        onClickWeatherCard={onClickWeatherCardHandler}
+                                    />
+                                );
+                            })
+                }
+            </DashboardMainContainer>
         </>
     );
 }
