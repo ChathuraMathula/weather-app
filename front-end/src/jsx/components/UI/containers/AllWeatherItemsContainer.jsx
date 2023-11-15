@@ -19,7 +19,7 @@ export default function AllWeatherItemsContainer({
 
     const onClickWeatherCardHandler = (cityName) => {
         const cityWeatherPath = `${WEATHER_CARD_VIEW_PATH}?city=${cityName}`;
-        navigate(cityWeatherPath, { replace: true });
+        navigate(cityWeatherPath);
     };
 
     const onAddCityHandler = (cityCodes) => {
