@@ -1,7 +1,7 @@
 
 export const APP_HEADING = "Weather App";
 
-export const FOOTER_DESCRIPTION = "© 2023 | Chathura Ekanayake";
+export const FOOTER_DESCRIPTION = "2023 | Fidenz Technologies | Chathura Ekanayake";
 
 export const WEATHER_API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 
