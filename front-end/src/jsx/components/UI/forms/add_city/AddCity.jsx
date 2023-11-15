@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import "../../../../css/AddCity.css";
-import { ADD_CITY_URL, GET_CITIES_BY_NAME_URL } from "../../../../js/constants/constants";
-import AddCityButton from "../buttons/AddCityButton";
+import "../../../../../css/AddCity.css";
+import { ADD_CITY_URL, GET_CITIES_BY_NAME_URL } from "../../../../../js/constants/constants";
+import AddCityButton from "../../buttons/AddCityButton";
+import AddCityForm from "./AddCityForm";
+import AddCityInput from "./AddCityInput";
 
 export default function AddCity({ onAddCity }) {
 
@@ -111,45 +113,21 @@ export default function AddCity({ onAddCity }) {
     }
 
     return (
-        <div className="add-city-outer__container">
-            <form onSubmit={onAddCityHandler} className="add-city__container">
-                <div className="add-city-input__container">
-                    <input
-                        id="add-city"
-                        value={inputValue}
-                        onChange={onChangeInputValueHandler}
-                        placeholder="Enter a city (eg: Colombo,LK)" />
-                    {
-                        isChanging && inputValue && cities.length > 0
-                            ?
-                            <ul>
-                                {cities.map((city, i) => {
-                                    return (
-                                        <li
-                                            key={city.id}
-                                            onClick={(event) => {
-                                                onClickListItemHandler(city.name, city.country)
-                                            }}
-                                        >
-                                            {city.state
-                                                ? `${city.name}, ${city.country} (${city.state})`
-                                                : `${city.name}, ${city.country}`}
-                                        </li>
-                                    );
-                                })}
-                            </ul>
-
-                            : null
-                    }
-
-                </div>
-                <AddCityButton
-                    type="submit"
-                    disabled={addCityDisabled}
-                    isChanging={isChanging}
-                    isLoading={isLoading}
-                />
-            </form>
-        </div>
+        <AddCityForm onSubmit={onAddCityHandler} >
+            <AddCityInput
+                value={inputValue}
+                onChange={onChangeInputValueHandler}
+                placeholder="Enter a city (eg: Colombo,LK)"
+                isChanging={isChanging}
+                cities={cities}
+                onClickListItem={onClickListItemHandler}
+            />
+            <AddCityButton
+                type="submit"
+                disabled={addCityDisabled}
+                isChanging={isChanging}
+                isLoading={isLoading}
+            />
+        </AddCityForm>
     );
 }

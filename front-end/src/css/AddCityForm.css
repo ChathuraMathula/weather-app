@@ -1,0 +1,38 @@
+.add-city-outer__container {
+    width: 100%;
+    text-align: center;
+    padding: 0 0.5rem;
+}
+
+.add-city-form__container {
+    max-width: 380px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2rem;
+    margin: 1rem auto;
+}
+
+/* For Medium Mobile Phones */
+@media (min-width: 576px) {
+    .add-city-form__container {
+        width: 70%;
+    }
+}
+
+/* For Tablets & Laptops */
+@media (min-width: 768px) {
+    .add-city-form__container {
+        width: 50%;
+    }
+}
+
+/* For Laptops */
+@media (min-width: 992px) {
+    .add-city-form__container {
+        width: 40%;
+    }
+}
+
+/* For Large screens */
+@media (min-width: 1200px) {}

@@ -39,6 +39,11 @@ export default function WeatherApp() {
         }
         setCityCodes([...cityCodes.list.reverse()]);
       })
+      .catch(error => {
+        if (error) {
+          setError(error.message);
+        }
+      });
   }, [])
 
   useEffect(() => {

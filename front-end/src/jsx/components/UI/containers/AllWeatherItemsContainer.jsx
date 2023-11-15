@@ -5,10 +5,15 @@ import { REMOVE_CITY_URL, WEATHER_CARD_VIEW_PATH } from "../../../../js/constant
 import DashboardMainContainer from "./DashboardMainContainer";
 import ErrorMessage from "../other/ErrorMessage";
 import LoadingSpinner from "../other/LoadingSpinner";
-import AddCity from "../other/AddCity";
+import AddCity from "../forms/add_city/AddCity";
 
 export default function AllWeatherItemsContainer({
-    weatherData, error, isLoading, onAddCity, onRemoveCity }) {
+    weatherData,
+    error,
+    isLoading,
+    onAddCity,
+    onRemoveCity
+}) {
 
     const navigate = useNavigate();
 

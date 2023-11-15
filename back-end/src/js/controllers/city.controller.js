@@ -1,4 +1,4 @@
-import { ALL_APP_CITIES_COLLECTION, APP_CITIES_COLLECTION, CITY_CODES_COLLECTION } from "../constants/constants.js";
+import { ALL_APP_CITIES_COLLECTION, CITY_CODES_COLLECTION } from "../constants/constants.js";
 import Database from "../helpers/database.helper.js";
 
 

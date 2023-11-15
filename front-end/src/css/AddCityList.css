@@ -1,0 +1,51 @@
+ul.add-city-list {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    z-index: 1;
+    width: 100%;
+    max-height: 50vh;
+    overflow-y: auto;
+    background-color: #1f2127;
+    text-align: left;
+    scrollbar-width: thin;
+}
+
+ul.add-city-list::-webkit-scrollbar {
+    width: 0.6rem;
+}
+
+ul.add-city-list::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #6b5dd3d8;
+}
+
+ul.add-city-list::-webkit-scrollbar-thumb:hover {
+    background: #6b5dd3;
+}
+
+ul.add-city-list>li {
+    padding: 6px;
+    cursor: pointer;
+    color: #797a7d;
+    border-top: 1px solid #6b5dd3;
+}
+
+ul.add-city-list>li:hover {
+    color: white;
+    background-color: #6b5dd3;
+    transition: all 0.2s;
+}
+
+/* For Medium Mobile Phones */
+@media (min-width: 576px) {}
+
+/* For Tablets & Laptops */
+@media (min-width: 768px) {}
+
+/* For Laptops */
+@media (min-width: 992px) {}
+
+/* For Large screens */
+@media (min-width: 1200px) {}

@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { ALL_APP_CITIES_COLLECTION, APP_CITIES_COLLECTION, CITY_CODES_COLLECTION } from '../constants/constants.js';
+import { ALL_APP_CITIES_COLLECTION, CITY_CODES_COLLECTION } from '../constants/constants.js';
 
 
 async function isExistCollection(database, collectionName) {

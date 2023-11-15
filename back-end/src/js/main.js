@@ -4,13 +4,14 @@ import cityRoutes from './routes/cityRoutes.js';
 
 import express from 'express';
 import cors from 'cors';
+import { CORS_METHODS, CORS_ORIGIN_URL } from "./constants/constants.js";
 
 const port = 3001;
 const app = express();
 
 var corsOptions = {
-    origin: 'http://localhost:3000',
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    origin: CORS_ORIGIN_URL,
+    methods: CORS_METHODS,
     optionsSuccessStatus: 200
 }
 
