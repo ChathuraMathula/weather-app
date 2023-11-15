@@ -11,7 +11,7 @@ export const WEATHER_API_BASE_URL = "https://api.openweathermap.org/data/2.5/gro
 
 export const WEATHER_ICON_BASE_URL = "https://openweathermap.org/img/wn";
 
-export const CACHE_EXPIRE_TIME_IN_MILISECONDS = 5 // * 60 * 1000;
+export const CACHE_EXPIRE_TIME_IN_MILISECONDS = 5 * 60 * 1000;
 
 export const CACHE_WEATHER_DATA_KEY = "cachedWeatherData";
 

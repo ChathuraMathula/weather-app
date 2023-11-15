@@ -14,8 +14,6 @@ import ErrorMessage from './UI/other/ErrorMessage';
 import { GET_APP_CITY_CODES_URL, PAGE_NOT_FOUND_PATH, ROOT_PATH, WEATHER_CARD_VIEW_PATH } from '../../js/constants/constants';
 import MainContainer from './UI/containers/MainContainer';
 
-// const cityCodes = cities.List.map(city => city.CityCode);
-
 export default function WeatherApp() {
 
   const [weatherData, setWeatherData] = useState({});
@@ -23,9 +21,6 @@ export default function WeatherApp() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // const cityCodes = useMemo(() => {
-  //   return cities.List.map(city => city.CityCode);
-  // }, []);
 
   useEffect(() => {
     fetch(GET_APP_CITY_CODES_URL)
@@ -46,7 +41,7 @@ export default function WeatherApp() {
 
     let cachedWeatherData = fetchCachedWeatherData();
 
-    if (!cachedWeatherData) {
+    if (!cachedWeatherData || cachedWeatherData.cnt != cityCodes.length) {
       setIsLoading(true);
       await fetchWeatherDataByCityCodes(cityCodes)
         .then(latestWeatherData => {

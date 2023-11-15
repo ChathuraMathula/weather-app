@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "../../../../css/AddCity.css";
 import { ADD_CITY_URL, GET_CITIES_BY_NAME_URL } from "../../../../js/constants/constants";
+import AddCityButton from "../buttons/AddCityButton";
 
 export default function AddCity({ onAddCity }) {
 
@@ -9,6 +10,8 @@ export default function AddCity({ onAddCity }) {
     const [cityName, setCityName] = useState("");
     const [countryName, setCountryName] = useState("");
     const [isChanging, setIsChanging] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [addCityDisabled, setAddCityDisabled] = useState(true);
 
     useEffect(() => {
         if (!inputValue || inputValue.length < 2) {
@@ -39,7 +42,7 @@ export default function AddCity({ onAddCity }) {
         };
 
         const timeout = setTimeout(() => {
-
+            setIsLoading(true);
             fetch(GET_CITIES_BY_NAME_URL, {
                 method: "POST",
                 headers: {
@@ -50,7 +53,7 @@ export default function AddCity({ onAddCity }) {
                 .then(res => res.json())
                 .then(data => {
                     setCities([...data])
-                    console.log(data);
+                    setIsLoading(false);
                 });
         }, 1000);
 
@@ -77,8 +80,10 @@ export default function AddCity({ onAddCity }) {
             })
                 .then(res => res.json())
                 .then(cityCodes => {
-                    setInputValue("");
                     onAddCity(cityCodes);
+                    setInputValue("");
+                    setIsChanging(false);
+                    setAddCityDisabled(true);
                 })
         }
     };
@@ -86,14 +91,20 @@ export default function AddCity({ onAddCity }) {
 
     const onChangeInputValueHandler = (event) => {
         setIsChanging(true);
-        console.log(event.target.value)
-        setInputValue(event.target.value);
+        setAddCityDisabled(true);
+        const input = event.target.value;
+        console.log(input)
+        if (!input) {
+            setIsChanging(false);
+        }
+        setInputValue(input);
     }
 
     const onClickListItemHandler = (cityName, countryName) => {
         console.log(cityName, countryName)
-        setIsChanging(false);
         setInputValue(`${cityName}, ${countryName}`);
+        setIsChanging(false);
+        setAddCityDisabled(false);
     }
 
     return (
@@ -128,7 +139,12 @@ export default function AddCity({ onAddCity }) {
                 }
 
             </div>
-            <button type="submit">Add City</button>
+            <AddCityButton
+                type="submit"
+                disabled={addCityDisabled}
+                isChanging={isChanging}
+                isLoading={isLoading}
+            />
         </form>
     );
 }

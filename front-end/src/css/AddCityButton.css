@@ -1,0 +1,26 @@
+.add-city-button {}
+
+.add-city-button:hover {
+    cursor: pointer;
+}
+
+.add-city-button:disabled {
+    cursor: not-allowed;
+}
+
+.add-city-progress {
+    color: white;
+    height: 10px;
+}
+
+/* For Medium Mobile Phones */
+@media (min-width: 576px) {}
+
+/* For Tablets & Laptops */
+@media (min-width: 768px) {}
+
+/* For Laptops */
+@media (min-width: 992px) {}
+
+/* For Large screens */
+@media (min-width: 1200px) {}
