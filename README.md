@@ -17,7 +17,7 @@
 1. Create a directory called `data` inside the `database` directory which was created above.
 
 > [!WARNING]
-> If you did not create a `database` directory and `data` sub directory docker image will not run properly.
+> If you did not create a `database` directory and `data` sub directory, docker image will not run properly.
 
 1. Make sure your host computer does not connected the other running programmes to these ports `3000, 3001, 27017`
 
@@ -25,4 +25,7 @@
 
 1. After successfully created the image, docker will automatically start the containers.
 
-1. Finally, visit http://localhost:3000/ to use the application.
+>[!NOTE]
+>When the back-end node.js server is running for the first time, it will call for data populating scripts in order to start the application. Please wait untill all the data inside the city.list.json and cities.json files get populated to the MonogoDB database. 
+
+1. Finally, When the back-end node.js server is listening on port 3001, you can visit http://localhost:3000/ to use the application.
