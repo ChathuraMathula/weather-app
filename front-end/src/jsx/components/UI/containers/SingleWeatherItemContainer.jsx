@@ -14,8 +14,12 @@ export default function SingleWeatherItemContainer({ weatherData, error, isLoadi
 
     const cityName = searchParams.get(CITY_NAME_SEARCH_PARAM_KEY);
 
-    useEffect(() => {
+    console.log(cityName, weatherData, isLoading, error)
 
+    useEffect(() => {
+        if (!weatherData?.list) {
+            return;
+        }
         const extractedCityWeatherData = weatherData?.list.filter(city => {
             return city.name === cityName;
         });
@@ -25,30 +29,29 @@ export default function SingleWeatherItemContainer({ weatherData, error, isLoadi
         }
 
         setCityWeatherData({ ...extractedCityWeatherData[0] });
-    }, []);
+    }, [isLoading, error]);
 
 
     const onClickBackhandler = () => {
         navigate(ROOT_PATH, { replace: true });
     };
 
-    if (cityWeatherData?.name) {
-        return (
-            <>
-                <MainContainer>
-                    {
-                        error
-                            ? <ErrorMessage error={error} />
-                            : isLoading
-                                ? <LoadingSpinner />
-                                : <ViewWeatherCard
-                                    city={cityWeatherData}
-                                    onClickBack={onClickBackhandler}
-                                />
-                    }
-                </MainContainer>
+    return (
+        <>
+            <MainContainer>
+                {
+                    error
+                        ? <ErrorMessage error={error} />
+                        : isLoading
+                            ? <LoadingSpinner />
+                            : cityWeatherData?.name ? <ViewWeatherCard
+                                city={cityWeatherData}
+                                onClickBack={onClickBackhandler}
+                            /> : null
+                }
+            </MainContainer>
 
-            </>
-        );
-    }
+        </>
+    );
+
 }

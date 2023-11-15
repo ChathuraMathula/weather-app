@@ -3,7 +3,7 @@ import '../../css/App.css';
 
 import cities from "../../json/cities.json";
 
-import { fetchCachedWeatherData, cacheWeatherData } from '../../js/helpers/localStorageHelpers';
+import { fetchCachedWeatherData, cacheWeatherData, isCachedDataExpired } from '../../js/helpers/localStorageHelpers';
 import fetchWeatherDataByCityCodes from '../../js/helpers/apiHelpers';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -11,7 +11,7 @@ import Layout from './Layout';
 import AllWeatherItemsContainer from './UI/containers/AllWeatherItemsContainer';
 import SingleWeatherItemContainer from './UI/containers/SingleWeatherItemContainer';
 import ErrorMessage from './UI/other/ErrorMessage';
-import { GET_APP_CITY_CODES_URL, PAGE_NOT_FOUND_PATH, ROOT_PATH, WEATHER_CARD_VIEW_PATH } from '../../js/constants/constants';
+import { GET_APP_CITY_CODES_URL, ROOT_PATH, WEATHER_CARD_VIEW_PATH } from '../../js/constants/constants';
 import MainContainer from './UI/containers/MainContainer';
 
 export default function WeatherApp() {
@@ -23,6 +23,16 @@ export default function WeatherApp() {
 
 
   useEffect(() => {
+    if (!isCachedDataExpired()) {
+      let cachedWeatherData = fetchCachedWeatherData();
+      setWeatherData({ ...cachedWeatherData });
+      setIsLoading(false);
+      setError(false);
+      return;
+    }
+
+    setIsLoading(true);
+
     fetch(GET_APP_CITY_CODES_URL)
       .then(res => res.json())
       .then(cityCodes => {
@@ -39,28 +49,19 @@ export default function WeatherApp() {
 
   const fetchWeatherData = async () => {
 
-    let cachedWeatherData = fetchCachedWeatherData();
-
-    if (!cachedWeatherData || cachedWeatherData.cnt != cityCodes.length) {
-      setIsLoading(true);
-      await fetchWeatherDataByCityCodes(cityCodes)
-        .then(latestWeatherData => {
-          cacheWeatherData(latestWeatherData);
-          setWeatherData({ ...latestWeatherData });
-          setIsLoading(false);
-          setError(false);
-        })
-        .catch(error => {
-          if (error) {
-            setError(error.message);
-          }
-        });
-
-    } else {
-      setWeatherData({ ...cachedWeatherData });
-      setIsLoading(false);
-      setError(false);
-    }
+    setIsLoading(true);
+    await fetchWeatherDataByCityCodes(cityCodes)
+      .then(latestWeatherData => {
+        cacheWeatherData(latestWeatherData);
+        setWeatherData({ ...latestWeatherData });
+        setIsLoading(false);
+        setError(false);
+      })
+      .catch(error => {
+        if (error) {
+          setError(error.message);
+        }
+      });
   };
 
   const onAddCityHandler = (cityCodes) => {
@@ -71,6 +72,7 @@ export default function WeatherApp() {
     setCityCodes([...cityCodes.list.reverse()]);
   }
 
+  console.log("APP: ", weatherData, isLoading, error)
   return (
     <BrowserRouter>
       <Routes>

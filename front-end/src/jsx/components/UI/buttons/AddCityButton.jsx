@@ -11,7 +11,7 @@ export default function AddCityButton({ type, disabled, isChanging, isLoading })
             disabled={disabled}
         >
             {
-                isLoading
+                isChanging
                     ?
                     <CircularProgress style={{ color: "white", height: "0.8rem", width: "0.8rem" }} />
                     : "Add City"

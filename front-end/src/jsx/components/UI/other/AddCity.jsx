@@ -92,6 +92,7 @@ export default function AddCity({ onAddCity }) {
     const onChangeInputValueHandler = (event) => {
         setIsChanging(true);
         setAddCityDisabled(true);
+        setCities([]);
         const input = event.target.value;
         console.log(input)
         if (!input) {
@@ -108,43 +109,45 @@ export default function AddCity({ onAddCity }) {
     }
 
     return (
-        <form onSubmit={onAddCityHandler} className="add-city__container">
-            <div className="add-city-input__container">
-                <input
-                    id="add-city"
-                    value={inputValue}
-                    onChange={onChangeInputValueHandler}
-                    placeholder="Enter a city (eg: Colombo,LK)" />
-                {
-                    isChanging && inputValue && cities.length > 0
-                        ?
-                        <ul>
-                            {cities.map((city, i) => {
-                                return (
-                                    <li
-                                        key={city.id}
-                                        onClick={(event) => {
-                                            onClickListItemHandler(city.name, city.country)
-                                        }}
-                                    >
-                                        {city.state
-                                            ? `${city.name}, ${city.country} (${city.state})`
-                                            : `${city.name}, ${city.country}`}
-                                    </li>
-                                );
-                            })}
-                        </ul>
+        <div className="add-city-outer__container">
+            <form onSubmit={onAddCityHandler} className="add-city__container">
+                <div className="add-city-input__container">
+                    <input
+                        id="add-city"
+                        value={inputValue}
+                        onChange={onChangeInputValueHandler}
+                        placeholder="Enter a city (eg: Colombo,LK)" />
+                    {
+                        isChanging && inputValue && cities.length > 0
+                            ?
+                            <ul>
+                                {cities.map((city, i) => {
+                                    return (
+                                        <li
+                                            key={city.id}
+                                            onClick={(event) => {
+                                                onClickListItemHandler(city.name, city.country)
+                                            }}
+                                        >
+                                            {city.state
+                                                ? `${city.name}, ${city.country} (${city.state})`
+                                                : `${city.name}, ${city.country}`}
+                                        </li>
+                                    );
+                                })}
+                            </ul>
 
-                        : null
-                }
+                            : null
+                    }
 
-            </div>
-            <AddCityButton
-                type="submit"
-                disabled={addCityDisabled}
-                isChanging={isChanging}
-                isLoading={isLoading}
-            />
-        </form>
+                </div>
+                <AddCityButton
+                    type="submit"
+                    disabled={addCityDisabled}
+                    isChanging={isChanging}
+                    isLoading={isLoading}
+                />
+            </form>
+        </div>
     );
 }

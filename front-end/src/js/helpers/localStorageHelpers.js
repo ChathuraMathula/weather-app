@@ -28,5 +28,20 @@ export const fetchCachedWeatherData = () => {
         return null;
     }
     return data;
-
 };
+
+
+export const isCachedDataExpired = () => {
+    const cachedData = localStorage.getItem(CACHE_WEATHER_DATA_KEY);
+    if (!cachedData) {
+        return true;
+    }
+
+    const { timespan } = JSON.parse(cachedData);
+
+    const currTimeGap = Date.now() - timespan;
+
+    console.log("time gap:", currTimeGap, CACHE_EXPIRE_TIME_IN_MILISECONDS)
+
+    return currTimeGap > CACHE_EXPIRE_TIME_IN_MILISECONDS;
+}
