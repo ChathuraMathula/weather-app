@@ -22,7 +22,6 @@ export default function AllWeatherItemsContainer({
     }
 
     const onRemoveWeatherCardHandler = (cityCode) => {
-        console.log(cityCode)
 
         const body = {
             cityCode: cityCode
@@ -57,6 +56,7 @@ export default function AllWeatherItemsContainer({
                                         city={listItem}
                                         onClickWeatherCard={onClickWeatherCardHandler}
                                         onRemove={onRemoveWeatherCardHandler}
+                                        index={i}
                                     />
                                 );
                             })

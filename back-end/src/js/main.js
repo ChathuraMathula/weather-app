@@ -1,4 +1,4 @@
-import { populateAllCitiesTo, populateInitialCitiesTo, populateInitialCityCodesTo } from "./helpers/data.helper.js";
+import { populateAllCitiesTo, populateInitialCityCodesTo } from "./helpers/data.helper.js";
 import Database from "./helpers/database.helper.js";
 import cityRoutes from './routes/cityRoutes.js';
 
@@ -20,7 +20,6 @@ app.use(cityRoutes);
 
 Database.connect()
     .then(async database => {
-        await populateInitialCitiesTo(database);
         await populateAllCitiesTo(database);
         await populateInitialCityCodesTo(database);
     })

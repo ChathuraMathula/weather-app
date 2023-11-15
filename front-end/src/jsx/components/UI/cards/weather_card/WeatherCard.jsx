@@ -3,11 +3,11 @@ import "../../../../../css/WeatherCard.css";
 
 import WeatherCardBottom from "./WeatherCardBottom";
 
-import { getRandomHSLColor } from "../../../../../js/utils/colorUtils.js";
+import { getColor } from "../../../../../js/utils/colorUtils.js";
 import WeatherCardTop from "./WeatherCardTop";
 import RemoveButton from "../../buttons/RemoveButton.jsx";
 
-export default function WeatherCard({ city, onClickWeatherCard, onRemove }) {
+export default function WeatherCard({ city, onClickWeatherCard, onRemove, index }) {
 
     const date = new Date(city.dt * 1000);
 
@@ -23,7 +23,7 @@ export default function WeatherCard({ city, onClickWeatherCard, onRemove }) {
     return (
         <>
             <div key={city.name} className="weather-card__container"
-                style={{ backgroundColor: getRandomHSLColor(city.name) }}
+                style={{ backgroundColor: getColor(index) }}
                 onClick={() => onClickWeatherCardkHandler(city.name)}>
 
                 <RemoveButton onClick={onClickRemoveHandler} />

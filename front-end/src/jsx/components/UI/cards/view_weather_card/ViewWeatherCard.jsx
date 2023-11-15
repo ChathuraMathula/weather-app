@@ -1,25 +1,25 @@
 import React from "react";
 import "../../../../../css/ViewWeatherCard.css";
 
-import { getRandomHSLColor } from "../../../../../js/utils/colorUtils";
+import { getColor } from "../../../../../js/utils/colorUtils";
 
 import ViewWeatherCardBottom from "./ViewWeatherCardBottom";
 import ViewWeatherCardTop from "./ViewWeatherCardTop";
 import BackButton from "../../buttons/BackButton";
 
 
-export default function ViewWeatherCard (props) {
-    const city = props.city;
+export default function ViewWeatherCard({ city, onClickBack, index }) {
+
     const date = new Date(city.dt * 1000);
 
     const onClickBackHandler = (e) => {
-        props.onClickBack(true);
+        onClickBack(true);
     };
 
     return (
         <>
             <div className="view-weather-card__container"
-                style={{ backgroundColor: getRandomHSLColor(city.name) }}>
+                style={{ backgroundColor: getColor(index) }}>
 
                 <BackButton onClick={onClickBackHandler} />
                 <ViewWeatherCardTop

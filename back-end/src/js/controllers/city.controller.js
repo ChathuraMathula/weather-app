@@ -17,8 +17,6 @@ export async function getCitiesByCityName(req, res, next) {
     try {
         const { cityName, countryName } = req.body;
 
-        console.log(req.body, cityName.length <= 1);
-
         if (!cityName || cityName.length <= 1) {
             return res.json({ error: "No such data can be found." });
         }

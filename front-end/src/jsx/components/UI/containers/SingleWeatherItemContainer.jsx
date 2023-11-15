@@ -10,25 +10,33 @@ export default function SingleWeatherItemContainer({ weatherData, error, isLoadi
 
     const [searchParams] = useSearchParams();
     const [cityWeatherData, setCityWeatherData] = useState({});
+    const [weatherCardIndex, setWeatherCardIndex] = useState(0);
     const navigate = useNavigate();
 
     const cityName = searchParams.get(CITY_NAME_SEARCH_PARAM_KEY);
-
-    console.log(cityName, weatherData, isLoading, error)
 
     useEffect(() => {
         if (!weatherData?.list) {
             return;
         }
-        const extractedCityWeatherData = weatherData?.list.filter(city => {
-            return city.name === cityName;
-        });
 
-        if (extractedCityWeatherData.length == 0) {
+        const weatherDataArray = weatherData.list;
+
+        let isCityExists;
+        for (let i = 0; i < weatherDataArray.length; i++) {
+            const cityData = weatherDataArray[i];
+            if (cityData.name == cityName) {
+                setWeatherCardIndex(i);
+                setCityWeatherData({ ...cityData })
+                isCityExists = true;
+                break;
+            }
+        }
+
+        if (!isCityExists) {
             navigate(PAGE_NOT_FOUND_PATH, { replace: true });
         }
 
-        setCityWeatherData({ ...extractedCityWeatherData[0] });
     }, [isLoading, error]);
 
 
@@ -44,10 +52,13 @@ export default function SingleWeatherItemContainer({ weatherData, error, isLoadi
                         ? <ErrorMessage error={error} />
                         : isLoading
                             ? <LoadingSpinner />
-                            : cityWeatherData?.name ? <ViewWeatherCard
-                                city={cityWeatherData}
-                                onClickBack={onClickBackhandler}
-                            /> : null
+                            : cityWeatherData?.name
+                                ? <ViewWeatherCard
+                                    city={cityWeatherData}
+                                    onClickBack={onClickBackhandler}
+                                    index={weatherCardIndex}
+                                />
+                                : null
                 }
             </MainContainer>
 

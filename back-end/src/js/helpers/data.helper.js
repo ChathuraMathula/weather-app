@@ -29,26 +29,6 @@ export async function populateAllCitiesTo(database) {
     }
 }
 
-export async function populateInitialCitiesTo(database) {
-
-    const collectionName = APP_CITIES_COLLECTION;
-    const isExistAppCitiesCollection = await isExistCollection(database, collectionName)
-
-    if (isExistAppCitiesCollection) {
-        console.log("cities.json is already populated in database.")
-        return;
-    }
-
-    try {
-        const collection = database.collection(collectionName);
-        const data = JSON.parse(fs.readFileSync(path.join("src/json/cities.json")), 'utf8');
-        const result = await collection.insertMany(data.List);
-        console.log(`${result.insertedCount} documents inserted`);
-    } catch (error) {
-        console.log("Error populating initial app cities to database", error)
-    }
-}
-
 export async function populateInitialCityCodesTo(database) {
 
     const collectionName = CITY_CODES_COLLECTION;
@@ -68,7 +48,7 @@ export async function populateInitialCityCodesTo(database) {
             list: cityCodes
         }
         await collection.insertOne(body);
-        console.log(`document inserted`);
+        console.log(`city codes document inserted`);
     } catch (error) {
         console.log("Error populating initial app city codes to database", error)
     }

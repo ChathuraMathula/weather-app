@@ -1,8 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import '../../css/App.css';
 
-import cities from "../../json/cities.json";
-
 import { fetchCachedWeatherData, cacheWeatherData, isCachedDataExpired } from '../../js/helpers/localStorageHelpers';
 import fetchWeatherDataByCityCodes from '../../js/helpers/apiHelpers';
 
@@ -36,7 +34,9 @@ export default function WeatherApp() {
     fetch(GET_APP_CITY_CODES_URL)
       .then(res => res.json())
       .then(cityCodes => {
-        console.log(cityCodes)
+        if (cityCodes.list.length == 0) {
+          return setError("Please add a city.")
+        }
         setCityCodes([...cityCodes.list.reverse()]);
       })
   }, [])
@@ -65,14 +65,20 @@ export default function WeatherApp() {
   };
 
   const onAddCityHandler = (cityCodes) => {
+    if (!cityCodes) {
+      setIsLoading(true);
+      return;
+    }
     setCityCodes([...cityCodes.list.reverse()]);
   }
 
   const onRemoveCityHandler = (cityCodes) => {
+    if (cityCodes.list.length == 0) {
+      return setError("Please add a city.")
+    }
     setCityCodes([...cityCodes.list.reverse()]);
   }
 
-  console.log("APP: ", weatherData, isLoading, error)
   return (
     <BrowserRouter>
       <Routes>

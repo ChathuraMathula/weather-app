@@ -71,6 +71,8 @@ export default function AddCity({ onAddCity }) {
                 countryName: countryName
             };
 
+            onAddCity(false);
+
             await fetch(ADD_CITY_URL, {
                 method: "POST",
                 headers: {
@@ -90,11 +92,12 @@ export default function AddCity({ onAddCity }) {
 
 
     const onChangeInputValueHandler = (event) => {
+        const input = event.target.value;
+
         setIsChanging(true);
         setAddCityDisabled(true);
         setCities([]);
-        const input = event.target.value;
-        console.log(input)
+
         if (!input) {
             setIsChanging(false);
         }
@@ -102,7 +105,6 @@ export default function AddCity({ onAddCity }) {
     }
 
     const onClickListItemHandler = (cityName, countryName) => {
-        console.log(cityName, countryName)
         setInputValue(`${cityName}, ${countryName}`);
         setIsChanging(false);
         setAddCityDisabled(false);
