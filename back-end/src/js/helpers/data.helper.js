@@ -43,7 +43,6 @@ export async function populateInitialCityCodesTo(database) {
         const collection = database.collection(collectionName);
         const data = JSON.parse(fs.readFileSync(path.join("src/json/cities.json")), 'utf8');
         const cityCodes = data.List.map((city, i) => city.CityCode);
-        console.log(cityCodes)
         const body = {
             list: cityCodes
         }
