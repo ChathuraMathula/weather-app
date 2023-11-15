@@ -57,7 +57,7 @@ export default function AllWeatherItemsContainer({
                             : weatherData.list.map((listItem, i) => {
                                 return (
                                     <WeatherCard
-                                        key={listItem.name}
+                                        key={listItem.id}
                                         city={listItem}
                                         onClickWeatherCard={onClickWeatherCardHandler}
                                         onRemove={onRemoveWeatherCardHandler}
