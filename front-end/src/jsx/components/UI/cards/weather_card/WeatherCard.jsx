@@ -5,14 +5,19 @@ import WeatherCardBottom from "./WeatherCardBottom";
 
 import { getRandomHSLColor } from "../../../../../js/utils/colorUtils.js";
 import WeatherCardTop from "./WeatherCardTop";
+import RemoveButton from "../../buttons/RemoveButton.jsx";
 
-export default function WeatherCard(props) {
+export default function WeatherCard({ city, onClickWeatherCard, onRemove }) {
 
-    const city = props.city;
     const date = new Date(city.dt * 1000);
 
     const onClickWeatherCardkHandler = (cityName) => {
-        props.onClickWeatherCard(cityName);
+        onClickWeatherCard(cityName);
+    }
+
+    const onClickRemoveHandler = (event) => {
+        event.stopPropagation();
+        onRemove(city.id.toString());
     }
 
     return (
@@ -20,6 +25,8 @@ export default function WeatherCard(props) {
             <div key={city.name} className="weather-card__container"
                 style={{ backgroundColor: getRandomHSLColor(city.name) }}
                 onClick={() => onClickWeatherCardkHandler(city.name)}>
+
+                <RemoveButton onClick={onClickRemoveHandler} />
                 <WeatherCardTop
                     cityName={city.name}
                     country={city.sys.country}

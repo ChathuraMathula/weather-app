@@ -29,4 +29,6 @@ export const GET_CITIES_BY_NAME_URL = `${BACK_END_HOST_URL}/api/cities`;
 
 export const ADD_CITY_URL = `${BACK_END_HOST_URL}/api/app/city`;
 
+export const REMOVE_CITY_URL = `${BACK_END_HOST_URL}/api/app/city`;
+
 export const GET_APP_CITY_CODES_URL = `${BACK_END_HOST_URL}/api/app/cities`;

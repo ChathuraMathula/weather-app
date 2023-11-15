@@ -1,13 +1,14 @@
 import React from "react";
 import WeatherCard from "../cards/weather_card/WeatherCard";
 import { useNavigate } from "react-router-dom";
-import { WEATHER_CARD_VIEW_PATH } from "../../../../js/constants/constants";
+import { REMOVE_CITY_URL, WEATHER_CARD_VIEW_PATH } from "../../../../js/constants/constants";
 import DashboardMainContainer from "./DashboardMainContainer";
 import ErrorMessage from "../other/ErrorMessage";
 import LoadingSpinner from "../other/LoadingSpinner";
 import AddCity from "../other/AddCity";
 
-export default function AllWeatherItemsContainer({ weatherData, error, isLoading, onAddCity }) {
+export default function AllWeatherItemsContainer({
+    weatherData, error, isLoading, onAddCity, onRemoveCity }) {
 
     const navigate = useNavigate();
 
@@ -19,6 +20,27 @@ export default function AllWeatherItemsContainer({ weatherData, error, isLoading
     const onAddCityHandler = (cityCodes) => {
         onAddCity(cityCodes);
     }
+
+    const onRemoveWeatherCardHandler = (cityCode) => {
+        console.log(cityCode)
+
+        const body = {
+            cityCode: cityCode
+        }
+
+        fetch(REMOVE_CITY_URL, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
+        })
+            .then(res => res.json())
+            .then(cityCodes => {
+                onRemoveCity(cityCodes);
+            });
+    }
+
     return (
         <>
             <AddCity onAddCity={onAddCityHandler} />
@@ -34,6 +56,7 @@ export default function AllWeatherItemsContainer({ weatherData, error, isLoading
                                         key={listItem.name}
                                         city={listItem}
                                         onClickWeatherCard={onClickWeatherCardHandler}
+                                        onRemove={onRemoveWeatherCardHandler}
                                     />
                                 );
                             })

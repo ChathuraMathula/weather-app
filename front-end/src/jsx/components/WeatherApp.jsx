@@ -72,6 +72,9 @@ export default function WeatherApp() {
     setCityCodes([...cityCodes.list.reverse()]);
   }
 
+  const onRemoveCityHandler = (cityCodes) => {
+    setCityCodes([...cityCodes.list.reverse()]);
+  }
 
   return (
     <BrowserRouter>
@@ -85,6 +88,7 @@ export default function WeatherApp() {
                 isLoading={isLoading}
                 weatherData={weatherData}
                 onAddCity={onAddCityHandler}
+                onRemoveCity={onRemoveCityHandler}
               />
             }
           />

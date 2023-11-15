@@ -51,7 +51,7 @@ export default function AddCity({ onAddCity }) {
                 .then(data => {
                     setCities([...data])
                     console.log(data);
-                })
+                });
         }, 1000);
 
         return () => clearTimeout(timeout);
