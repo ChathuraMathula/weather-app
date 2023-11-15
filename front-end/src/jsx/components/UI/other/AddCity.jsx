@@ -8,6 +8,7 @@ export default function AddCity({ onAddCity }) {
     const [cities, setCities] = useState([]);
     const [cityName, setCityName] = useState("");
     const [countryName, setCountryName] = useState("");
+    const [isChanging, setIsChanging] = useState(false);
 
     useEffect(() => {
         if (!inputValue || inputValue.length < 2) {
@@ -20,12 +21,15 @@ export default function AddCity({ onAddCity }) {
 
         if (inputValues.length == 2) {
             setCountryName(inputValues[1].trim().toUpperCase());
+        } else {
+            setCountryName("");
         }
+
 
     }, [inputValue])
 
     useEffect(() => {
-        if (!cityName || !countryName) {
+        if (!isChanging || !cityName) {
             return;
         }
 
@@ -34,10 +38,7 @@ export default function AddCity({ onAddCity }) {
             countryName: countryName
         };
 
-
         const timeout = setTimeout(() => {
-
-            console.log(JSON.stringify(body))
 
             fetch(GET_CITIES_BY_NAME_URL, {
                 method: "POST",
@@ -57,6 +58,7 @@ export default function AddCity({ onAddCity }) {
 
     }, [cityName, countryName])
 
+
     const onAddCityHandler = async (event) => {
         event.preventDefault();
 
@@ -74,20 +76,23 @@ export default function AddCity({ onAddCity }) {
                 body: JSON.stringify(body),
             })
                 .then(res => res.json())
-                .then(weatherData => {
+                .then(cityCodes => {
                     setInputValue("");
-                    onAddCity(weatherData);
+                    onAddCity(cityCodes);
                 })
         }
     };
 
 
     const onChangeInputValueHandler = (event) => {
+        setIsChanging(true);
+        console.log(event.target.value)
         setInputValue(event.target.value);
     }
 
     const onClickListItemHandler = (cityName, countryName) => {
         console.log(cityName, countryName)
+        setIsChanging(false);
         setInputValue(`${cityName}, ${countryName}`);
     }
 
@@ -100,23 +105,25 @@ export default function AddCity({ onAddCity }) {
                     onChange={onChangeInputValueHandler}
                     placeholder="Enter a city (eg: Colombo,LK)" />
                 {
-                    inputValue && cities.length > 0
-                        ? <>
-                            <ul>
-                                {cities.map((city, i) => {
-                                    return (
-                                        <li
-                                            key={city.id}
-                                            onClick={(event) => {
-                                                onClickListItemHandler(city.name, city.country)
-                                            }}
-                                        >
-                                            {`${city.name}, ${city.country}`}
-                                        </li>
-                                    );
-                                })}
-                            </ul>
-                        </>
+                    isChanging && inputValue && cities.length > 0
+                        ?
+                        <ul>
+                            {cities.map((city, i) => {
+                                return (
+                                    <li
+                                        key={city.id}
+                                        onClick={(event) => {
+                                            onClickListItemHandler(city.name, city.country)
+                                        }}
+                                    >
+                                        {city.state
+                                            ? `${city.name}, ${city.country} (${city.state})`
+                                            : `${city.name}, ${city.country}`}
+                                    </li>
+                                );
+                            })}
+                        </ul>
+
                         : null
                 }
 

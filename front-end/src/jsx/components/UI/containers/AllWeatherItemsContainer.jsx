@@ -16,8 +16,8 @@ export default function AllWeatherItemsContainer({ weatherData, error, isLoading
         navigate(cityWeatherPath, { replace: true });
     };
 
-    const onAddCityHandler = (weatherData) => {
-        onAddCity(weatherData);
+    const onAddCityHandler = (cityCodes) => {
+        onAddCity(cityCodes);
     }
     return (
         <>

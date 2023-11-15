@@ -5,3 +5,5 @@ export const MONGO_DATABASE_NAME = "weather_app";
 export const APP_CITIES_COLLECTION = "appCities";
 
 export const ALL_APP_CITIES_COLLECTION = "allAppCities";
+
+export const CITY_CODES_COLLECTION = "cityCodes";

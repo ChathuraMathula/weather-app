@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { ALL_APP_CITIES_COLLECTION, APP_CITIES_COLLECTION } from '../constants/constants.js';
+import { ALL_APP_CITIES_COLLECTION, APP_CITIES_COLLECTION, CITY_CODES_COLLECTION } from '../constants/constants.js';
 
 
 async function isExistCollection(database, collectionName) {
@@ -46,5 +46,30 @@ export async function populateInitialCitiesTo(database) {
         console.log(`${result.insertedCount} documents inserted`);
     } catch (error) {
         console.log("Error populating initial app cities to database", error)
+    }
+}
+
+export async function populateInitialCityCodesTo(database) {
+
+    const collectionName = CITY_CODES_COLLECTION;
+    const hasAppCitiesCollection = await isExistCollection(database, collectionName)
+
+    if (hasAppCitiesCollection) {
+        console.log("city codes from cities.json is already populated in database.")
+        return;
+    }
+
+    try {
+        const collection = database.collection(collectionName);
+        const data = JSON.parse(fs.readFileSync(path.join("src/json/cities.json")), 'utf8');
+        const cityCodes = data.List.map((city, i) => city.CityCode);
+        console.log(cityCodes)
+        const body = {
+            list: cityCodes
+        }
+        await collection.insertOne(body);
+        console.log(`document inserted`);
+    } catch (error) {
+        console.log("Error populating initial app city codes to database", error)
     }
 }

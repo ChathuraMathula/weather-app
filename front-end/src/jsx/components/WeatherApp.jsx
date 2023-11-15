@@ -11,7 +11,7 @@ import Layout from './Layout';
 import AllWeatherItemsContainer from './UI/containers/AllWeatherItemsContainer';
 import SingleWeatherItemContainer from './UI/containers/SingleWeatherItemContainer';
 import ErrorMessage from './UI/other/ErrorMessage';
-import { PAGE_NOT_FOUND_PATH, ROOT_PATH, WEATHER_CARD_VIEW_PATH } from '../../js/constants/constants';
+import { GET_APP_CITY_CODES_URL, PAGE_NOT_FOUND_PATH, ROOT_PATH, WEATHER_CARD_VIEW_PATH } from '../../js/constants/constants';
 import MainContainer from './UI/containers/MainContainer';
 
 // const cityCodes = cities.List.map(city => city.CityCode);
@@ -19,22 +19,28 @@ import MainContainer from './UI/containers/MainContainer';
 export default function WeatherApp() {
 
   const [weatherData, setWeatherData] = useState({});
+  const [cityCodes, setCityCodes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const cityCodes = useMemo(() => {
-    return cities.List.map(city => city.CityCode);
-  }, []);
+  // const cityCodes = useMemo(() => {
+  //   return cities.List.map(city => city.CityCode);
+  // }, []);
 
+  useEffect(() => {
+    fetch(GET_APP_CITY_CODES_URL)
+      .then(res => res.json())
+      .then(cityCodes => {
+        console.log(cityCodes)
+        setCityCodes([...cityCodes.list.reverse()]);
+      })
+  }, [])
 
   useEffect(() => {
     if (cityCodes.length > 0) {
       fetchWeatherData();
     }
   }, [cityCodes]);
-
-
-  console.log("HERE 2: ", weatherData)
 
   const fetchWeatherData = async () => {
 
@@ -62,14 +68,8 @@ export default function WeatherApp() {
     }
   };
 
-  const onAddCityHandler = (weatherData) => {
-    const data = {
-      cnt: weatherData.length,
-      list: weatherData
-    }
-    console.log(data)
-    cacheWeatherData(data);
-    setWeatherData({ ...data });
+  const onAddCityHandler = (cityCodes) => {
+    setCityCodes([...cityCodes.list.reverse()]);
   }
 
 
