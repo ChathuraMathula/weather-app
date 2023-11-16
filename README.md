@@ -13,7 +13,7 @@ Author: @ChathuraMathula
 
 1. To build the image and start running the containers from that image please execute the command `docker-compose up`.
 
-1. After successfully starting the containers, you will have to wait untill the message `Server is listening on port 3001` is displayed on the console.
+1. After successfully starting the containers, you will have to wait untill the message `Server is listening on port 3001` is displayed on the console like the image shown below.![Console output messages](docs/screenshots/console-output.png)
 
 1. Finally, visit http://localhost:3000/ from your Chrome/Edge/Firefox web browser.
 
