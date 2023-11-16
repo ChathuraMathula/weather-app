@@ -20,3 +20,13 @@ Author: @ChathuraMathula
 > [!NOTE] 
 > This application uses host computers' ports `3000, 3001` and `27017`.
 > To stop the running containers, use `docker-compose stop` command.
+
+## Screenshots
+
+1. ![Dashboard screenshot](docs/screenshots/weather-app-dashboard.jpeg)
+
+
+1. ![View city screenshot](docs/screenshots/weather-app-view.jpeg)
+
+
+1. ![add city function screenshot](docs/screenshots/add-city-function.png)
