@@ -26,7 +26,7 @@ services:
 
   database:
     image: mongo:7
-    command: [ "mongod", "--quiet" ]
+    command: [ "mongod", "--quiet", "--logpath", "/dev/null" ]
     ports:
       - 27017:27017
     volumes:
