@@ -37,4 +37,4 @@ Author: @ChathuraMathula
 
 ### Mobile View
 
-![Mobile screenshots](docs/screenshots/weather-app-views-mobile.jpg)
+![Mobile screenshots](docs/screenshots/weather-app-views-mobile.png)
