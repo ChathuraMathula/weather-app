@@ -36,13 +36,5 @@ Author: @ChathuraMathula
 ![add city function screenshot](docs/screenshots/add-city-function.png)
 
 ### Mobile View
-1. Dashboard of the app
-![Dashboard screenshot](docs/screenshots/weather-app-dashboard-mobile.jpg)
 
-
-1. View specific city weather data
-![View city screenshot](docs/screenshots/weather-app-view-mobile.jpg)
-
-
-1. Add city input to add a new city
-![add city function screenshot](docs/screenshots/add-city-function-mobile.jpg)
+![Mobile screenshots](docs/screenshots/weather-app-views-mobile.jpg)
