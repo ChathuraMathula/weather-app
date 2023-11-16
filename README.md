@@ -5,9 +5,9 @@ This is a Mini Weather App implemented using MERN stack.
 Author: @ChathuraMathula
 
 ## Installation steps (for development)
-1. Download and extract the source code.
-
 1. Install and run Docker Desktop on your PC.
+
+1. Download and extract the source code.
 
 1. Open a terminal and navigate to the project root directory. (Directory where docker-compose.yaml file is located)
 
