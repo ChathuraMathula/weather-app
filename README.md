@@ -23,10 +23,13 @@ Author: @ChathuraMathula
 
 ## Screenshots
 
-1. ![Dashboard screenshot](docs/screenshots/weather-app-dashboard.jpeg)
+1. Dashboard of the app
+![Dashboard screenshot](docs/screenshots/weather-app-dashboard.jpeg)
 
 
-1. ![View city screenshot](docs/screenshots/weather-app-view.jpeg)
+1. View specific city weather data
+![View city screenshot](docs/screenshots/weather-app-view.jpeg)
 
 
-1. ![add city function screenshot](docs/screenshots/add-city-function.png)
+1. Add city input to add a new city
+![add city function screenshot](docs/screenshots/add-city-function.png)
