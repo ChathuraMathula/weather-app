@@ -1,0 +1,1 @@
+This folder contains persistent data of MongoDB container.
